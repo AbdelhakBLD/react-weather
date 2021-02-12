@@ -1,21 +1,26 @@
 import React, { useState } from "react";
+import MeteoService from "../services/MeteoService";
 
-const FormulaireFonction = () => {
-  const [input, setInput] = useState("");
+const FormulaireFonction = (props) => {
+  const [inputVille, setInputVille] = useState("");
 
   const handleChangeInput = (event) => {
-    setInput(event.target.value);
+    setInputVille(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    MeteoService.getMeteo(inputVille).then((meteoRes) =>
+      props.changeMeteoRes(meteoRes)
+    );
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Nom : 
-          <input type="text" value={input} onChange={handleChangeInput} />
+          Ville :
+          <input type="text" value={inputVille} onChange={handleChangeInput} />
         </label>
         <input type="submit" value="Envoyer" />
       </form>

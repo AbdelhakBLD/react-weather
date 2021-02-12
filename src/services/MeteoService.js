@@ -1,10 +1,14 @@
-const url = "http://api.openweathermap.org/data/2.5/weather?q=lille&appid=ff49cba504b62175b01318c478218655";
+const url = "http://api.openweathermap.org/data/2.5/weather";
+const apiKey = "ff49cba504b62175b01318c478218655";
 
 class MeteoService {
-  getMeteo = async () => {
-    return  await fetch(url, {
-      method: "GET",
-    }).then((res) => res.json())
+  getMeteo = async (inputVille) => {
+    return await fetch(
+      `${url}?q=${inputVille}&appid=${apiKey}&lang=fr&units=metric`,
+      {
+        method: "GET",
+      }
+    ).then((res) => res.json());
   };
 }
 
